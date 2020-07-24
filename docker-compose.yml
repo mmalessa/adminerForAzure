@@ -1,0 +1,17 @@
+version: '3.1'
+
+# https://docs.microsoft.com/pl-pl/azure/mysql/howto-configure-ssl
+
+services:
+  adminer:
+    image: adminer:4.7.7
+    container_name: adminer
+    restart: always
+    environment:
+      ADMINER_DESIGN: flat
+      DB_SSL_CA: '/certs/ca.pem'
+    volumes:
+      - ./login-ssl.php:/var/www/html/plugins-enabled/login-ssl.php
+      - ./BaltimoreCyberTrustRoot.crt.pem:/certs/ca.pem
+    ports:
+      - 8080:8080
