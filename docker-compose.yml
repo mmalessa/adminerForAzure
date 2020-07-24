@@ -11,7 +11,7 @@ services:
       ADMINER_DESIGN: flat
       DB_SSL_CA: '/certs/ca.pem'
     volumes:
-      - ./login-ssl.php:/var/www/html/plugins-enabled/login-ssl.php
-      - ./BaltimoreCyberTrustRoot.crt.pem:/certs/ca.pem
+      - ./login-azure-ssl.php:/var/www/html/plugins-enabled/login-azure-ssl.php
+      - ${DB_SSL_CA}:/certs/ca.pem
     ports:
       - 8080:8080
