@@ -4,18 +4,26 @@ version: '3.1'
 
 services:
   adminer:
-    image: adminer:4.8.0
+    image: adminer:4.8.1
     # image: dockette/adminer:latest
     # image: dehy/adminer:latest
     container_name: adminer
     restart: always
     environment:
-      ADMINER_DESIGN: flat
+      ADMINER_DESIGN: rmsoft
       DB_SSL_CA: '/certs/ca.pem'
-      MEMORY: 512M
-      UPLOAD: 1024M
     volumes:
       - ./login-azure-ssl.php:/var/www/html/plugins-enabled/login-azure-ssl.php
       - ${DB_SSL_CA}:/certs/ca.pem
+      - ./php-ini-overrides.ini:/usr/local/etc/php/conf.d/zz-php-ini-overrides.ini
     ports:
       - 18080:8080
+    networks:
+      galderma:
+      dmo:
+
+networks:
+  galderma:
+    name: galderma
+  dmo:
+    name: dmo
